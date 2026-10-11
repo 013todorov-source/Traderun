@@ -1,0 +1,35 @@
+CLAUDE TRADE RUN – ANLEITUNG (nur mit dem iPhone)
+
+TEIL 1: SPIEL ALS OFFLINE-APP AUFS IPHONE
+1. Diese ZIP-Datei in der Dateien-App antippen. Es entsteht der Ordner "claude-trade-run" mit 9 Dateien.
+2. Safari öffnen, github.com aufrufen, kostenloses Konto anlegen, E-Mail bestätigen.
+3. Oben auf "+" > "New repository". Name: trade-run. "Public" wählen. "Create repository".
+4. Auf "uploading an existing file" tippen > "Dateien auswählen" > in den Ordner "claude-trade-run" gehen > alle Dateien markieren > "Öffnen". Unten "Commit changes".
+5. "Settings" > links "Pages" > Branch "main", Ordner "/ (root)" > "Save". Nach 1-2 Minuten steht oben die Adresse: https://DEIN-NAME.github.io/trade-run/
+   (Fehlen Buttons: in Safari auf "aA" > "Desktop-Website anfordern".)
+6. Adresse in Safari öffnen, das Spiel einmal laden lassen. Dann Teilen-Symbol > "Zum Home-Bildschirm" > "Hinzufügen".
+7. Test: Flugmodus an, App vom Home-Bildschirm starten. Sie läuft ohne Internet.
+
+TEIL 2: SPIEL AN FREUNDE SCHICKEN
+Schick einfach die Adresse aus Teil 1 per WhatsApp. Dein Freund tippt auf den Link und wählt oben/unten "In Safari öffnen" (WhatsApp-Browser kann nichts installieren). Dann macht er Schritt 6 und hat die gleiche Offline-App.
+Im Spiel geht es auch über "📲 App" > "Spiel teilen".
+
+TEIL 3: ONLINE-RANGLISTE MIT FREUNDEN (optional, einmalig)
+1. console.firebase.google.com mit Google-Konto öffnen > "Projekt erstellen" (Google Analytics ausschalten).
+2. Links "Erstellen" > "Realtime Database" > "Datenbank erstellen" > Standort wählen > "Im gesperrten Modus starten".
+3. Reiter "Regeln": alles ersetzen durch den Text unten > "Veröffentlichen".
+4. Reiter "Daten": die Adresse oben (https://....firebasedatabase.app oder ....firebaseio.com) kopieren.
+5. GitHub > Repository trade-run > Datei "config.js" > Stift-Symbol > zwischen die Anführungszeichen einfügen, z. B.
+   window.TR_CONFIG={db:"https://dein-projekt-default-rtdb.firebaseio.com"};
+   > "Commit changes".
+6. App auf dem iPhone zweimal komplett schließen und neu öffnen (erst der zweite Start nutzt die neue Datei).
+7. Im Spiel: "FREUNDE" > Namen eingeben > "Code teilen". Dein Freund tippt "+ Freund" und gibt deinen Code ein, du seinen. Tab "Rekord" = bester Score, "Heute" = Tageswelt (gleiche Strecke für alle).
+
+REGELN FÜR TEIL 3 (genau so einfügen):
+{"rules":{".read":false,".write":false,"players":{"$code":{".read":true,".write":true,".validate":"$code.matches(/^[A-Z2-9]{6}$/)&&newData.hasChildren(['n','s'])","n":{".validate":"newData.isString()&&newData.val().length<=12"},"s":{".validate":"newData.isNumber()&&newData.val()>=0&&newData.val()<100000000"},"ds":{".validate":"newData.isNumber()&&newData.val()>=0&&newData.val()<100000000"},"dd":{".validate":"newData.isString()&&newData.val().length<=10"},"t":{".validate":"newData.isNumber()"},"$other":{".validate":false}}}}}
+
+OFFLINE / ONLINE
+- Ohne Internet läuft alles normal. Spielstand, Missionen, Shop liegen auf dem Gerät. Die Freunde-Liste zeigt die zuletzt geladenen Stände.
+- Sobald wieder Netz da ist, wird dein Score automatisch hochgeladen.
+- Nur wer deinen Code kennt, kann deinen Eintrag lesen. Scores sind nicht gegen Schummeln geschützt (Spaßspiel).
+- Neue Version einspielen: Dateien in GitHub ersetzen. Die App aktualisiert sich beim übernächsten Start von selbst.
